@@ -37,14 +37,14 @@ class ListaDobleCircular:
             self.ultimo.siguiente = nuevo_nodo
             self.primero = nuevo_nodo
 
-    def eliminar(self, dato):
+    def eliminarCategoria(self, categoria):
         if self.esta_vacia():
             return
 
         nodo_actual = self.primero
         nodo_anterior = None
 
-        while nodo_actual.dato != dato:
+        while nodo_actual.dato.categoria != categoria:
             if nodo_actual.siguiente == self.primero:
                 return
             nodo_anterior = nodo_actual
@@ -105,16 +105,85 @@ class ListaDobleCircular:
                 break
         return True
     
-    def agregar_Peli_a_Cate(self, titulo, director, anio, fecha, hora):
+    def agregar_Peli_a_Cate(self, categoria, titulo, director, anio, fecha, hora):
         if self.esta_vacia():
             return
 
         nodo_actual = self.primero
 
         while True:
-            if 'Comedia' == nodo_actual.dato.categoria:
+            if categoria == nodo_actual.dato.categoria:
                 datos = peliculas(titulo, director, anio, fecha, hora)
                 nodo_actual.dato.nombrepeli.insertar_al_final(datos)
             nodo_actual = nodo_actual.siguiente
             if nodo_actual == self.primero:
                 break
+    
+    def busc_cate_para_Eliminar(self, categoria, titulo):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while True:
+            if categoria == nodo_actual.dato.categoria:
+                nodo_actual.dato.nombrepeli.eliminarPeli(titulo)
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
+    
+    def eliminarPeli(self, titulo):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+        nodo_anterior = None
+
+        while nodo_actual.dato.titulo != titulo:
+            if nodo_actual.siguiente == self.primero:
+                return
+            nodo_anterior = nodo_actual
+            nodo_actual = nodo_actual.siguiente
+
+        if nodo_actual == self.primero and nodo_actual == self.ultimo:
+            self.primero = None
+            self.ultimo = None
+        elif nodo_actual == self.primero:
+            self.primero = nodo_actual.siguiente
+            self.ultimo.siguiente = self.primero
+            self.primero.anterior = self.ultimo
+        elif nodo_actual == self.ultimo:
+            self.ultimo = nodo_anterior
+            self.primero.anterior = self.ultimo
+            self.ultimo.siguiente = self.primero
+        else:
+            nodo_anterior.siguiente = nodo_actual.siguiente
+            nodo_actual.siguiente.anterior = nodo_anterior
+
+    def chec_Categoria(self, categoria):
+        if self.esta_vacia():
+            return
+        Estado = False
+        nodo_actual = self.primero
+
+        while True:
+            if categoria == nodo_actual.dato.categoria:
+                Estado = True
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
+        return Estado
+    
+    def chec_Categoria_Eliminar(self, categoria):
+        if self.esta_vacia():
+            return
+        Estado = True
+        nodo_actual = self.primero
+
+        while True:
+            if categoria == nodo_actual.dato.categoria:
+                Estado = False
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
+        return Estado

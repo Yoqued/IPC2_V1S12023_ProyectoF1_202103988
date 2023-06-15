@@ -74,12 +74,12 @@ class menu_admin:
                 if opc == 1:
                     limpiar()
                     print('------------------------------------------')
-                    nombre_user = input('Ingrese su NOMBRE: ')
-                    apellido_user = input('Ingrese su APELLIDO: ')
-                    telefono_user = input('Ingrese su TELEFONO: ')
-                    correo_user = input('Ingres su CORREO: ')
-                    contra_user = input('Ingrese un CONTRASEÑA: ')
-                    rol_user = input('Ingrese el ROL: ')
+                    nombre_user = input('Ingrese su "NOMBRE": ')
+                    apellido_user = input('Ingrese su "APELLIDO": ')
+                    telefono_user = input('Ingrese su "TELEFONO": ')
+                    correo_user = input('Ingres su "CORREO": ')
+                    contra_user = input('Ingrese un "CONTRASEÑA": ')
+                    rol_user = input('Ingrese el "ROL": ')
                     User_ = datos_usuario(rol_user, nombre_user, apellido_user, telefono_user, correo_user, contra_user)
                     lista_Usuarios.agregar_al_final(User_)
                     limpiar()
@@ -114,8 +114,124 @@ class menu_admin:
                 print('------------------------------------------')
 
     def opcion2():
-        agregar = Xlectura()
-        agregar.leerCateyPeli('PelisyCate.xml')
+        opc = 0
+        while opc != 8:
+            print('------------------------------------------')
+            print('1. Crear "CATEGORIA"')
+            print('2. Modificar "CATEGORIA"')
+            print('3. Eliminar "CATEGORIA"')
+            print('4. Crear "PELÍCULA"')
+            print('5. Modificar "PELÍCULA"')
+            print('6. Eliminar "PELÍCULA"')
+            print('7. Leer archivo de "CATEGORIAS Y PELICULAS"')
+            print('8. para "REGRESAR"')
+            print('------------------------------------------')
+            try:
+                opc = int(input('"Ingrese su opción": '))
+                if opc == 1:
+                    limpiar()
+                    print('------------------------------------------')
+                    categoria = input('Ingrese nueva "CATEGORIA"')
+                    if lista_Categoria.chec_Categoria(categoria) is True:
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"CATERGORIA YA EXISTE"')
+                    else:
+                        print('------------------------------------------')
+                        print('Para crear categoria debe de Crear una "PELICULA"')
+                        print('------------------------------------------')
+                        titulo = input('Ingrese "TITULO": ')
+                        director = input('Ingrese "DIRECTOR": ')
+                        anio = input('Ingrese "AÑO": ')
+                        fecha = input('Ingrese "FECHA": ')
+                        hora = input('Ingrese "HORA": ')
+                        global lista_Pelicula
+                        datos = peliculas(titulo, director, anio, fecha, hora)
+                        lista_Pelicula.insertar_al_final(datos)
+                        datosCat = categorias(categoria, lista_Pelicula)
+                        lista_Categoria.insertar_al_final(datosCat)
+                        lista_Pelicula = ListaDobleCircular()
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"CATEGORIA AGREGADA"')
+                elif opc == 2:
+                    pass
+                elif opc == 3:
+                    limpiar()
+                    print('------------------------------------------')
+                    cate = input('Ingrese categoria a "ELIMINAR": ')
+                    if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"CATERGORIA NO EXISTE"')
+                    else:
+                        lista_Categoria.eliminarCategoria(cate)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"CATEGORIA ELIMINADA"')
+                elif opc == 4:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Listado de "CATEGORIAS DE PELICULAS"')
+                    acceso = lista_Categoria.imprimir_Categorias()
+                    if acceso is True:
+                        print('-----------------------------------------------------')
+                        cate = input('Ingrese categoria a la que quiere agregar una "PELICULA": ')
+                        if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATERGORIA NO EXISTE"')
+                        else:
+                            print('------------------------------------------')
+                            titulo = input('Ingrese "TITULO": ')
+                            director = input('Ingrese "DIRECTOR": ')
+                            anio = input('Ingrese "AÑO": ')
+                            fecha = input('Ingrese "FECHA": ')
+                            hora = input('Ingrese "HORA": ')
+                            lista_Categoria.agregar_Peli_a_Cate(cate, titulo, director, anio, fecha, hora)
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"PELÍCULA AGREGADA"')
+                elif opc == 5:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Listado de "CATEGORIAS DE PELICULAS"')
+                    acceso = lista_Categoria.imprimir_Categorias()
+                    if acceso is True:
+                        print('-----------------------------------------------------')
+                        cate = input('Ingrese categoria a la que quiere agregar una "PELICULA": ')
+                        if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATERGORIA NO EXISTE"')
+                        else:
+                            print('------------------------------------------')
+                            titulo = input('Ingrese "TITULO": ')
+                            director = input('Ingrese "DIRECTOR": ')
+                            anio = input('Ingrese "AÑO": ')
+                            fecha = input('Ingrese "FECHA": ')
+                            hora = input('Ingrese "HORA": ')
+                            lista_Categoria.agregar_Peli_a_Cate(cate, titulo, director, anio, fecha, hora)
+                elif opc == 6:
+                    pass
+                elif opc == 7:
+                    limpiar()
+                    print('------------------------------------------')
+                    root = input('ingrese "RUTA" de archivo de Categorias y Películas: ')
+                    agregar = Xlectura()
+                    agregar.leerCateyPeli(root)
+                    lista_Categoria.imprimir_Categorias()
+                elif opc == 8:
+                    limpiar()
+                else:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Ingrese Valores dentro del "RANGO"')
+            except:
+                limpiar()
+                print('------------------------------------------')
+                print('Ingrese valores "VALIDOS"')
+                print('------------------------------------------')
 
     def opcion3():
         pass
@@ -137,6 +253,7 @@ class menu_admin:
                     limpiar()
                     menu_admin.opcion1()
                 elif opciones == 2:
+                    limpiar()
                     menu_admin.opcion2()
                 elif opciones == 3:
                     menu_admin.opcion3()
