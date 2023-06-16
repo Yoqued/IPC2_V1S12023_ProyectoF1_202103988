@@ -5,6 +5,83 @@ def limpiar():
     os.system('cls')
 
 class menu_admin:
+    def modificar_Peli():
+        print('-----------------------------------------------------')
+        cate = input('Ingrese categoria a la que quiere modificar una "PELICULA": ')
+        if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+            limpiar()
+            print('------------------------------------------')
+            print('"CATERGORIA NO EXISTE"')
+        else:
+            print('------------------------------------------')
+            lista_Categoria.imprimir_peli1(cate)
+            print('------------------------------------------')
+            peli = input('Ingrese pelicula a "MODIFICAR": ')
+            limpiar()
+            opc = 0
+            while opc != 6:
+                print('------------------------------------------')
+                print('1. Para cambiar "TITULO"')
+                print('2. Para cambiar "DIRECTOR"')
+                print('3. Para cambiar "AÑO"')
+                print('4. Para cambiar "FECHA"')
+                print('5. Para cambiar "HORA"')
+                print('6. para "REGRESAR"')
+                print('------------------------------------------')
+                try:
+                    opc = int(input('"Ingrese su opción": '))
+                    if opc == 1:
+                        limpiar()
+                        ('------------------------------------------')
+                        titulo = input('Ingrese Titulo "MODIFICAR": ')
+                        lista_Categoria.buscar_categoria_pelicula(cate, peli, None, None, None, None, titulo)
+                        opc = 6
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"TITULO MODIFICADO"')
+                        print('Por modifcar TITULO no podra seguir editando \n mas aspectos de la película')
+                    elif opc == 2:
+                        limpiar()
+                        ('------------------------------------------')
+                        director = input('Ingrese Director "DIRECTOR": ')
+                        lista_Categoria.buscar_categoria_pelicula(cate, peli, director, None, None, None, None)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"DIRECTOR MODIFICADO"')
+                    elif opc == 3:
+                        limpiar()
+                        ('------------------------------------------')
+                        anio = input('Ingrese Año "AÑO": ')
+                        lista_Categoria.buscar_categoria_pelicula(cate, peli, None, anio, None, None, None)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"AÑO MODIFICADO"')
+                    elif opc == 4:
+                        limpiar()
+                        ('------------------------------------------')
+                        fecha = input('Ingrese Fecha "FECHA": ')
+                        lista_Categoria.buscar_categoria_pelicula(cate, peli, None, None, fecha, None, None)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"FECHA MODIFICADA"')
+                    elif opc == 5:
+                        limpiar()
+                        ('------------------------------------------')
+                        hora = input('Ingrese "HORA": ')
+                        lista_Categoria.buscar_categoria_pelicula(cate, peli, None, None, None, hora, None)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"HORA MODIFICADA"')
+                    elif opc == 6:
+                        limpiar()
+                    else:
+                        limpiar()
+                except:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Ingrese valores "VALIDOS"')
+                    print('------------------------------------------')
+
     def modifi_User():
         limpiar()
         option = 0
@@ -155,20 +232,42 @@ class menu_admin:
                         print('------------------------------------------')
                         print('"CATEGORIA AGREGADA"')
                 elif opc == 2:
-                    pass
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Listado de "CATEGORIAS DE PELICULAS"')
+                    check = lista_Categoria.imprimir_Categorias()
+                    if check != False:
+                        print('------------------------------------------')
+                        cate = input('Ingrese categoria a "MODIFICAR": ')
+                        if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATERGORIA NO EXISTE"')
+                        else:
+                            limpiar()
+                            print('------------------------------------------')
+                            new_cate = input('Ingrese el nombre "NUEVO" de la Categoria: ')
+                            lista_Categoria.modificar_categoria(cate, new_cate)
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATEGORIA MODIFICADA"')
                 elif opc == 3:
                     limpiar()
                     print('------------------------------------------')
-                    cate = input('Ingrese categoria a "ELIMINAR": ')
-                    if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
-                        limpiar()
+                    print('Listado de "CATEGORIAS DE PELICULAS"')
+                    check = lista_Categoria.imprimir_Categorias()
+                    if check != False:
                         print('------------------------------------------')
-                        print('"CATERGORIA NO EXISTE"')
-                    else:
-                        lista_Categoria.eliminarCategoria(cate)
-                        limpiar()
-                        print('------------------------------------------')
-                        print('"CATEGORIA ELIMINADA"')
+                        cate = input('Ingrese categoria a "ELIMINAR": ')
+                        if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATERGORIA NO EXISTE"')
+                        else:
+                            lista_Categoria.eliminarCategoria(cate)
+                            limpiar()
+                            print('------------------------------------------')
+                            print('"CATEGORIA ELIMINADA"')
                 elif opc == 4:
                     limpiar()
                     print('------------------------------------------')
@@ -198,22 +297,27 @@ class menu_admin:
                     print('Listado de "CATEGORIAS DE PELICULAS"')
                     acceso = lista_Categoria.imprimir_Categorias()
                     if acceso is True:
+                        menu_admin.modificar_Peli()
+                elif opc == 6:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('Listado de "CATEGORIAS DE PELICULAS"')
+                    acceso = lista_Categoria.imprimir_Categorias()
+                    if acceso is True:
                         print('-----------------------------------------------------')
-                        cate = input('Ingrese categoria a la que quiere agregar una "PELICULA": ')
+                        cate = input('Ingrese categoria para ver las "PELÍCULAS": ')
                         if lista_Categoria.chec_Categoria_Eliminar(cate) is True:
                             limpiar()
                             print('------------------------------------------')
                             print('"CATERGORIA NO EXISTE"')
                         else:
                             print('------------------------------------------')
-                            titulo = input('Ingrese "TITULO": ')
-                            director = input('Ingrese "DIRECTOR": ')
-                            anio = input('Ingrese "AÑO": ')
-                            fecha = input('Ingrese "FECHA": ')
-                            hora = input('Ingrese "HORA": ')
-                            lista_Categoria.agregar_Peli_a_Cate(cate, titulo, director, anio, fecha, hora)
-                elif opc == 6:
-                    pass
+                            lista_Categoria.imprimir_peli1(cate)
+                            print('------------------------------------------')
+                            title = input('Ingrese pelicula a "ELIMINAR": ')
+                            limpiar()
+                            print('------------------------------------------')
+                            print(lista_Categoria.busc_cate_para_Eliminar(cate, title))
                 elif opc == 7:
                     limpiar()
                     print('------------------------------------------')
@@ -268,7 +372,3 @@ class menu_admin:
                 print('------------------------------------------')
                 print('Ingrese valores "VALIDOS"')
                 print('------------------------------------------')
-
-
-
-

@@ -85,7 +85,12 @@ class ListaDobleCircular:
         nodo_actual = self.primero
 
         while True:
-            print(nodo_actual.dato.titulo)
+            print('------------------------------------------')
+            print('-', nodo_actual.dato.titulo)
+            print('-', nodo_actual.dato.director)
+            print('-', nodo_actual.dato.anio)
+            print('-', nodo_actual.dato.fecha)
+            print('-', nodo_actual.dato.hora)
             nodo_actual = nodo_actual.siguiente
             if nodo_actual == self.primero:
                 break
@@ -127,7 +132,7 @@ class ListaDobleCircular:
 
         while True:
             if categoria == nodo_actual.dato.categoria:
-                nodo_actual.dato.nombrepeli.eliminarPeli(titulo)
+                return nodo_actual.dato.nombrepeli.eliminarPeli(titulo)
             nodo_actual = nodo_actual.siguiente
             if nodo_actual == self.primero:
                 break
@@ -141,24 +146,28 @@ class ListaDobleCircular:
 
         while nodo_actual.dato.titulo != titulo:
             if nodo_actual.siguiente == self.primero:
-                return
+                return 'No se encontro la "PELÍCULA"'
             nodo_anterior = nodo_actual
             nodo_actual = nodo_actual.siguiente
 
         if nodo_actual == self.primero and nodo_actual == self.ultimo:
             self.primero = None
             self.ultimo = None
+            return 'Película "ELIMINADA"'
         elif nodo_actual == self.primero:
             self.primero = nodo_actual.siguiente
             self.ultimo.siguiente = self.primero
             self.primero.anterior = self.ultimo
+            return 'Película "ELIMINADA"'
         elif nodo_actual == self.ultimo:
             self.ultimo = nodo_anterior
             self.primero.anterior = self.ultimo
             self.ultimo.siguiente = self.primero
+            return 'Película "ELIMINADA"'
         else:
             nodo_anterior.siguiente = nodo_actual.siguiente
             nodo_actual.siguiente.anterior = nodo_anterior
+            return 'Película "ELIMINADA"'
 
     def chec_Categoria(self, categoria):
         if self.esta_vacia():
@@ -187,3 +196,51 @@ class ListaDobleCircular:
             if nodo_actual == self.primero:
                 break
         return Estado
+    
+    def modificar_categoria(self, categoria_antigua, categoria_nueva):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while nodo_actual.dato.categoria != categoria_antigua:
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                return
+
+        nodo_actual.dato.categoria = categoria_nueva
+
+    def buscar_categoria_pelicula(self, categoria, titulo, director, anio, fecha, hora, titulo_new):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while True:
+            if categoria == nodo_actual.dato.categoria:
+                nodo_actual.dato.nombrepeli.modificar_pelicula(titulo, director, anio, fecha, hora, titulo_new)
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
+    
+    def modificar_pelicula(self, titulo, director, anio, fecha, hora, titulo_new):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while nodo_actual.dato.titulo != titulo:
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                return
+        if director is None and anio is None and fecha is None and hora is None:
+            print("cagate")
+            nodo_actual.dato.titulo = titulo_new
+        elif anio is None and fecha is None and hora is None and titulo_new is None:
+            nodo_actual.dato.director = director
+        elif director is None and fecha is None and hora is None and titulo_new is None:
+            nodo_actual.dato.anio = anio
+        elif director is None and anio is None and hora is None and titulo_new is None:
+            nodo_actual.dato.fecha = fecha
+        elif director is None and anio is None and fecha is None and titulo_new is None:
+            nodo_actual.dato.hora = hora

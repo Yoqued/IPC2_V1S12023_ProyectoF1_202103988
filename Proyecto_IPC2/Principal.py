@@ -13,11 +13,6 @@ datos = datos_usuario('administrador', 'Raúl', 'Yoque', '31914079', 'yoque6@gma
 lista_Usuarios.agregar_al_final(datos)
 
 opciones = 0
-#agregar = Xlectura()
-#agregar.leerCateyPeli('PelisyCate.xml')
-
-#lista_Categoria.agregar_Peli_a_Cate('hola', 'papi', '2013', '2015', '565656')
-#lista_Categoria.busc_cate_para_Eliminar('Comedia', 'Deadpool')
 
 while opciones != 4:
     print('--------------Menu Principal--------------')
