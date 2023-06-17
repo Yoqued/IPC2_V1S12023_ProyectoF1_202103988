@@ -2,11 +2,13 @@ import xml.etree.ElementTree as ET
 from Clases.DatosUsuario import * 
 from Clases.DatosPelicula import *
 from Clases.DatosCategoria import *
+from Clases.DatosPeliculasFavoritas import *
 from Listas.ListaEnlazada import *
 from Listas.ListaCircular import *
 lista_Usuarios = listaEnlazada()
 lista_Categoria = ListaDobleCircular()
 lista_Pelicula = ListaDobleCircular()
+peliculas_Favoritas = listaEnlazada()
 
 class Xlectura:
     def leerUsuarios(self, ruta):

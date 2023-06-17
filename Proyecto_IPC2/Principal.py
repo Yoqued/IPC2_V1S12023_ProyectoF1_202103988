@@ -32,7 +32,7 @@ while opciones != 4:
             if estadoC == True and rolC == 'cliente':
                 limpiar()
                 menuCliente = menu_cliente()
-                menu_cliente.Principal_Cliente(nombreC)
+                menuCliente.Principal_Cliente(nombreC, correoA)
             elif estadoC == True and rolC == 'administrador':
                 limpiar()
                 menuAdmin = menu_admin()
@@ -68,7 +68,6 @@ while opciones != 4:
                         print('------------------------------------------')
                         print('"CATERGORIA NO EXISTE"')
                 else:
-                    print('------------------------------------------')
                     lista_Categoria.imprimir_peli1(genero)
         elif opciones == 4:
             limpiar()

@@ -1,22 +1,60 @@
+from ArchivosXML.xml_Lectura import *
 import os
 
 def limpiar():
     os.system('cls')
 
 class menu_cliente:
-    def opcion1(self):
-        print('Buenas noches maestro')
+    def opcion1(correo):
+        limpiar()
+        print('------------------------------------------')
+        print('Listado de "CATEGORIAS DE PELICULAS"')
+        acceso = lista_Categoria.imprimir_Categorias()
+        if acceso is True:
+            print('------------------------------------------')
+            genero = input('Ingrese categoria para ver pelíuculas "DISPONIBLES": ')
+            if lista_Categoria.chec_Categoria_Eliminar(genero) is True:
+                    limpiar()
+                    print('------------------------------------------')
+                    print('"CATERGORIA NO EXISTE"')
+            else:
+                lista_Categoria.imprimir_peli1(genero)
+                print('------------------------------------------')
+                desicion = input('Escriba "SI" para agregar pelicula\n favoritas "NO" para salir: ')
+                if desicion.upper() == "SI":
+                    print('------------------------------------------')
+                    pelicula = input('Ingrese nombre de su Película "FAVORITA": ')
 
-    def opcion2(self):
+                    if lista_Categoria.cate_Fav(genero, pelicula) == True:
+                        data = peliculasFavorita(correo, pelicula)
+                        peliculas_Favoritas.agregar_al_final(data)
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"PELÍCULA FAVORITA AGREGADA"')
+                    else:
+                        limpiar()
+                        print('------------------------------------------')
+                        print('"NO SE ENCONTRO LA PELÍCULA"')
+                else:
+                    limpiar()
+
+    def opcion2(correo):
+        limpiar()
+        check = peliculas_Favoritas.checkear(correo)
+        if check == True:
+            limpiar()
+            print('------------------------------------------')
+            print('"NO TIENE PELICULAS FAVORITAS"')
+        else:
+            peliculas_Favoritas.imprimir_PelisFavoritas(correo)
+
+    def opcion3():
         pass
 
-    def opcion3(self):
+    def opcion4():
         pass
 
-    def opcion4(self):
-        pass
-
-    def Principal_Cliente(self, name):
+    def Principal_Cliente(self, name, correo):
         print('------------------------------------------')
         print('Bienvenido '+'"'+name+'"')
         opc = 0
@@ -31,9 +69,9 @@ class menu_cliente:
             try:
                 opc = int(input('"Ingrese su opción": '))
                 if opc == 1:
-                    menu_cliente.opcion1()
+                    menu_cliente.opcion1(correo)
                 elif opc == 2:
-                    menu_cliente.opcion2()
+                    menu_cliente.opcion2(correo)
                 elif opc == 3:
                     menu_cliente.opcion3()
                 elif opc == 4:

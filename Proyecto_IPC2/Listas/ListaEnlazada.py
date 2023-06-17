@@ -81,5 +81,20 @@ class listaEnlazada:
             nodo_actual = nodo_actual.siguiente
         return 'El Usuario del correo:', correo, 'no se encontró'         
 
+    def imprimir_PelisFavoritas(self,correo):
+        nodo_actual = self.cabeza
+        while nodo_actual is not None:
+            if nodo_actual.dato.correo == correo:
+                print('------------------------------------------')
+                print(nodo_actual.dato.titulo)
+            nodo_actual = nodo_actual.siguiente
 
-
+    def checkear(self, correo):
+        if self.esta_vacia():
+            return True
+        nodo_actual = self.cabeza
+        while nodo_actual is not None:
+            if nodo_actual.dato.correo == correo:
+                return False
+            nodo_actual = nodo_actual.siguiente
+        return True

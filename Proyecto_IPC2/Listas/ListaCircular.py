@@ -218,7 +218,7 @@ class ListaDobleCircular:
 
         while True:
             if categoria == nodo_actual.dato.categoria:
-                nodo_actual.dato.nombrepeli.modificar_pelicula(titulo, director, anio, fecha, hora, titulo_new)
+                return nodo_actual.dato.nombrepeli.modificar_pelicula(titulo, director, anio, fecha, hora, titulo_new)
             nodo_actual = nodo_actual.siguiente
             if nodo_actual == self.primero:
                 break
@@ -232,9 +232,9 @@ class ListaDobleCircular:
         while nodo_actual.dato.titulo != titulo:
             nodo_actual = nodo_actual.siguiente
             if nodo_actual == self.primero:
-                return
+                print("no")
+                return False
         if director is None and anio is None and fecha is None and hora is None:
-            print("cagate")
             nodo_actual.dato.titulo = titulo_new
         elif anio is None and fecha is None and hora is None and titulo_new is None:
             nodo_actual.dato.director = director
@@ -244,3 +244,29 @@ class ListaDobleCircular:
             nodo_actual.dato.fecha = fecha
         elif director is None and anio is None and fecha is None and titulo_new is None:
             nodo_actual.dato.hora = hora
+
+    def cate_Fav(self, categoria, titulo):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while True:
+            if categoria == nodo_actual.dato.categoria:
+                return nodo_actual.dato.nombrepeli.peli_Fav(titulo)
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
+    
+    def peli_Fav(self, titulo):
+        if self.esta_vacia():
+            return
+
+        nodo_actual = self.primero
+
+        while True:
+            if titulo == nodo_actual.dato.titulo:
+                return True
+            nodo_actual = nodo_actual.siguiente
+            if nodo_actual == self.primero:
+                break
